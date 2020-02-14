@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: pareto-serverless-mongo
+service: divinity-serverless-mongo
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -38,7 +38,7 @@ functions:
   createUser:
     handler: users.create
     environment:
-      DB: ${ssm:mongo}
+      DB: ${ssm:divinity}
     events:
       - http:
           path: users
@@ -47,7 +47,7 @@ functions:
   getOneUser:
     handler: users.getOne
     environment:
-      DB: ${ssm:mongo}
+      DB: ${ssm:divinity}
     events:
       - http:
           path: users/{id}
@@ -56,7 +56,7 @@ functions:
   getAllUsers:
     handler: users.getAll
     environment:
-      DB: ${ssm:mongo}
+      DB: ${ssm:divinity}
     events:
       - http:
           path: users
@@ -65,7 +65,7 @@ functions:
   updateUser:
     handler: users.update
     environment:
-      DB: ${ssm:mongo}
+      DB: ${ssm:divinity}
     events:
       - http:
           path: users/{id}
@@ -74,9 +74,54 @@ functions:
   deleteUser:
     handler: users.delete
     environment:
-      DB: ${ssm:mongo}
+      DB: ${ssm:divinity}
     events:
       - http:
           path: users/{id}
+          method: delete
+          cors: true
+  createOrder:
+    handler: orders.create
+    environment:
+      DB: ${ssm:divinity}
+    events:
+      - http:
+          path: orders
+          method: post
+          cors: true
+  getOrder:
+    handler: orders.getOrder
+    environment:
+      DB: ${ssm:divinity}
+    events:
+      - http:
+          path: orders/{id}
+          method: get
+          cors: true
+  getAllOrders:
+    handler: orders.getAllOrders
+    environment:
+      DB: ${ssm:divinity}
+    events:
+      - http:
+          path: orders
+          method: get
+          cors: true
+  updateOrder:
+    handler: orders.updateOrder
+    environment:
+      DB: ${ssm:divinity}
+    events:
+      - http:
+          path: orders/{id}
+          method: put
+          cors: true
+  deleteOrder:
+    handler: orders.deleteOrder
+    environment:
+      DB: ${ssm:divinity}
+    events:
+      - http:
+          path: orders/{id}
           method: delete
           cors: true
